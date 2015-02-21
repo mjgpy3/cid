@@ -9,11 +9,11 @@
     .controller('appController', appController)
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider.when('/services', {
-        templateUrl: 'partials/services.html',
+        templateUrl: 'js/services/partials/services.html',
         controller: ServicesController
       })
       .when('/service/:serviceId', {
-        templateUrl: 'partials/modify_service.html',
+        templateUrl: 'js/services/partials/modify_service.html',
         controller: ServicesController
       });
     }]);
