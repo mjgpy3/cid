@@ -9,11 +9,31 @@
 
 package main
 
-import "net/http"
+import (
+	"net/http"
+	_"encoding/json"
+	"fmt"
+)
+
+func servicesHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("[REQUEST] All Services")
+
+	responseData := `[{
+		"name": "Service1",
+		"definition": ""
+	}]`
+
+	fmt.Printf("responding with: %s", responseData)
+	fmt.Fprintf(w, responseData)
+}
+
 
 func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
 
+	http.HandleFunc("/services", servicesHandler)
+
+	fmt.Println("Listening on port 5678")
 	http.ListenAndServe(":5678", nil)
 }

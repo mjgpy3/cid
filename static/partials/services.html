@@ -1,0 +1,12 @@
+<div ng-hide="services.length">
+  <p>No services found</p>
+</div>
+
+<div ng-show="services.length">
+  <h3>Services:</h3>
+  <ul>
+    <li ng-repeat="service in services">
+      {{ service.name }}
+    </li>
+  </ul>
+</div>
