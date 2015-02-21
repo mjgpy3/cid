@@ -1,5 +1,5 @@
 #!/bin/bash
 
-export GOPATH=`dirname $0`
+export GOPATH=$CID_ROOT
 
 go run $GOPATH/src/cid/cid.go
