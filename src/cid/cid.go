@@ -4,11 +4,14 @@ import (
 	"net/http"
 	"fmt"
 	"cid/handlers"
+	"os"
 )
 
 
 func main() {
-	fs := http.FileServer(http.Dir("static"))
+	staticDir := http.Dir(os.Getenv("GOPATH") + "/src/cid/static")
+	fmt.Println("Static content from: " + staticDir)
+	fs := http.FileServer(staticDir)
 	http.Handle("/", fs)
 
 	for url, handler := range handlers.URL_TO_HANDLER {
