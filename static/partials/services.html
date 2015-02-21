@@ -6,7 +6,7 @@
   <h3>Services:</h3>
   <ul>
     <li ng-repeat="service in services">
-      {{ service.name }}
+      <a ng-href="/#/service/{{service.id}}"><button>{{ service.name }}</button></a>
     </li>
   </ul>
 </div>

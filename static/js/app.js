@@ -1,28 +1,5 @@
 (function () {
-  var appController = ['$http', function ($http) {
-    this.foo = 'blah2';
-  }];
-
-  var servicesController = ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
-    if ($routeParams.serviceId) {
-      $http
-        .get('/service/' + $routeParams.serviceId)
-        .then(function (response) {
-          console.log(response.data);
-          $scope.service = response.data;
-        }, function (err) {
-          console.log("Error: ", err);
-        });
-    }
-
-    $http
-      .get('/services')
-      .then(function (response) {
-        console.log(response.data);
-        $scope.services = response.data;
-      }, function (err) {
-        console.log("Error: ", err);
-      });
+  var appController = [function () {
   }];
 
   angular
@@ -33,11 +10,11 @@
     .config(['$routeProvider', function ($routeProvider) {
       $routeProvider.when('/services', {
         templateUrl: 'partials/services.html',
-        controller: servicesController
+        controller: ServicesController
       })
       .when('/service/:serviceId', {
-        templateUrl: 'partials/modify-service.html',
-        controller: servicesController
+        templateUrl: 'partials/modify_service.html',
+        controller: ServicesController
       });
     }]);
 })();
