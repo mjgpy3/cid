@@ -11,31 +11,18 @@ package main
 
 import (
 	"net/http"
-	_"encoding/json"
 	"fmt"
+	"cid/handlers"
 )
 
-const SERVICE_1 = `{
-		"name": "Service1",
-		"definition": "some definition stuff",
-		"id": 1
-	}`
-
-func stubbedHandler(requestDescription string, responseText string) func(http.ResponseWriter, *http.Request) {
-	return func (w http.ResponseWriter, r *http.Request) {
-		fmt.Println("[REQUEST] " + requestDescription)
-
-		fmt.Printf("[RESPONSE] %s", responseText)
-		fmt.Fprintf(w, responseText)
-	}
-}
 
 func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
 
-	http.HandleFunc("/services", stubbedHandler("All Services", "[" + SERVICE_1 + "]"))
-	http.HandleFunc("/service/1", stubbedHandler("Service 1", SERVICE_1))
+	for url, handler := range handlers.URL_TO_HANDLER {
+		http.HandleFunc(url, handler)
+	}
 
 	fmt.Println("Listening on port 5678")
 	http.ListenAndServe(":5678", nil)
